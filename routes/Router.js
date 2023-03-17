@@ -3,15 +3,17 @@ const {
   LoginAdmin,
   LoginClient,
   SignUpClient,
+  createAdmin,
 } = require("../controllers/LoginController.js");
-const { saveImage } = require("../middleware/middleware.js");
-const saveImageController = require("../controllers/MainController.js");
+//const { saveImage } = require("../middleware/middleware.js");
+//const saveImageController = require("../controllers/MainController.js");
 
 const router = express.Router();
 
 router.route("/loginAdmin").post(LoginAdmin);
 router.route("/loginClient").post(LoginClient);
 router.route("/signupClient").post(SignUpClient);
+router.route("/dev/createAdmin").post(createAdmin);
 //router.route("/image", saveImage).post(saveImageController);
 
 module.exports = router;
