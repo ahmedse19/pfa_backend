@@ -8,7 +8,10 @@ const storage = multer.diskStorage({
     cb(null, uuid.v1() + "-" + file.originalname);
   },
 });
-const upload = multer({ storage: storage });
+
+upload = multer({ storage: storage });
+module.exports = { upload };
+
 //////////////jwt authetification///////////////
 
 // export function authenticateToken(req, res, next) {
