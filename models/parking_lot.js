@@ -34,6 +34,14 @@ module.exports = function(sequelize, DataTypes) {
         model: 'administrateur',
         key: 'Id_Admin'
       }
+    },
+    longitude: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    latitude: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     sequelize,

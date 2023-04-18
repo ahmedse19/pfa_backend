@@ -9,6 +9,7 @@ module.exports = {
     const user = await getModels().administrateur.findOne({
       where: { Email: email },
     });
+
     if (user === null) {
       return res.status(400).json({
         message: "user not found",
@@ -19,7 +20,7 @@ module.exports = {
           const accessToken = jwt.sign(
             { email: email },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: "15m" }
+            { expiresIn: "30m" }
           );
           res.json({
             message: "logged in successfully",
@@ -106,7 +107,7 @@ module.exports = {
           valide: true,
           Solde: solde,
           Méthode_paiment: methodePaiment,
-        });
+        }); //here  console.log(user.dataValues);
         res.status(201).json({
           message: "user created successfully",
         });
