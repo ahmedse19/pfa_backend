@@ -36,11 +36,11 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     longitude: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DOUBLE,
       allowNull: false
     },
     latitude: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DOUBLE,
       allowNull: false
     }
   }, {
