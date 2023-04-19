@@ -33,6 +33,7 @@ module.exports = {
   },
   getClientDetails: async (req, res) => {
     const authHeader = req.headers["authorization"];
+    console.log(authHeader);
     const token = authHeader && authHeader.split(" ")[1];
     let email;
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
@@ -58,7 +59,7 @@ module.exports = {
         id: user.Id_client,
         name: user.Name,
         email: user.Email,
-        vehicle: user["Véhicule"],
+        vehicule: user["Véhicule"],
         N_immatriculation: user.N_immatriculation,
         solde: user.Solde,
         methodePayement: user["Méthode_paiment"],
