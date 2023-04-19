@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     Solde: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DOUBLE,
       allowNull: false
     },
     'Méthode_paiment': {
