@@ -60,9 +60,9 @@ module.exports = {
         name: user.Name,
         email: user.Email,
         vehicule: user["Véhicule"],
-        N_immatriculation: user.N_immatriculation,
+        immatriculation: user.N_immatriculation,
         solde: user.Solde,
-        methodePayement: user["Méthode_paiment"],
+        methodePaiment: user["Méthode_paiment"],
       },
     });
   },
