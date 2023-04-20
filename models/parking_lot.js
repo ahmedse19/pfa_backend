@@ -20,11 +20,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     Open_time: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.TIME,
       allowNull: false
     },
     Close_time: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.TIME,
       allowNull: false
     },
     Id_Admin: {
@@ -41,14 +41,6 @@ module.exports = function(sequelize, DataTypes) {
     },
     latitude: {
       type: DataTypes.DOUBLE,
-      allowNull: false
-    },
-    opentime: {
-      type: DataTypes.TIME,
-      allowNull: false
-    },
-    closetime: {
-      type: DataTypes.INTEGER,
       allowNull: false
     }
   }, {
