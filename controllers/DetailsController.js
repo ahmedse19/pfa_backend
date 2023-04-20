@@ -33,7 +33,6 @@ module.exports = {
   },
   getClientDetails: async (req, res) => {
     const authHeader = req.headers["authorization"];
-    console.log(authHeader);
     const token = authHeader && authHeader.split(" ")[1];
     let email;
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {

@@ -139,4 +139,16 @@ module.exports = {
       });
     }
   },
+  LogoutClient: async (req, res) => {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+      if (err) {
+        res.status(403).json({ message: "Invalid token" });
+      } else {
+        decode.exp = Date.now();
+        res.status(200).json({ message: "logged out successfully" });
+      }
+    });
+  },
 };

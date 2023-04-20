@@ -42,6 +42,14 @@ module.exports = function(sequelize, DataTypes) {
     latitude: {
       type: DataTypes.DOUBLE,
       allowNull: false
+    },
+    opentime: {
+      type: DataTypes.TIME,
+      allowNull: false
+    },
+    closetime: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     sequelize,
