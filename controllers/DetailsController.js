@@ -67,12 +67,10 @@ module.exports = {
   },
   getMaps: async (req, res) => {
     const parkings = await getModels().parking_lot.findAll();
-    console.log(parkings);
+
     res.status(200).json({
       message: "parkings found",
-      data: {
-        parkings: parkings,
-      },
+      data: parkings,
     });
   },
 };
