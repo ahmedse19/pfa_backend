@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const { getModels } = require("../routes/databaseCon.js");
+const { sendEmail } = require("../Services/EmailService.js");
 
 module.exports = {
   LoginAdmin: async (req, res) => {
@@ -111,6 +112,13 @@ module.exports = {
         res.status(201).json({
           message: "user created successfully",
         });
+        const code = Math.floor(Math.random() * 1000000);
+        try {
+          await sendEmail(name, email, code);
+        } catch (e) {
+          console.log(e);
+          console.log("email not sent");
+        }
       } catch (e) {
         console.log(e);
         res.status(500).json({
