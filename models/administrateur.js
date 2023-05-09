@@ -18,6 +18,10 @@ module.exports = function(sequelize, DataTypes) {
     Password: {
       type: DataTypes.CHAR(100),
       allowNull: false
+    },
+    numero_Tel: {
+      type: DataTypes.STRING(15),
+      allowNull: false
     }
   }, {
     sequelize,

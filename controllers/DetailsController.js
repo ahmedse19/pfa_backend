@@ -28,6 +28,7 @@ module.exports = {
         id: user.Id_Admin,
         name: user.Name,
         email: user.Email,
+        phone: user.numero_Tel,
       },
     });
   },
