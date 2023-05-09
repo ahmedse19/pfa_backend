@@ -60,7 +60,7 @@ module.exports = {
             verificationCodes.delete(email);
           } else {
             res.json({
-              message: "Invalid Verification code",
+              message: "Invalid Verification Code",
             });
           }
         }
