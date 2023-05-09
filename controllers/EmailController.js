@@ -1,7 +1,6 @@
 const { sendEmail, verificationCodes } = require("../Services/EmailService.js");
 const jwt = require("jsonwebtoken");
 const { getModels } = require("../routes/databaseCon.js");
-const { emit } = require("nodemon");
 
 module.exports = {
   ResendEmail: async (req, res) => {
@@ -37,7 +36,7 @@ module.exports = {
       });
     }
   },
-  verifyEmail: (req, res) => {
+  verifyEmail: async (req, res) => {
     try {
       const authHeader = req.headers["authorization"];
       const token = authHeader && authHeader.split(" ")[1];
@@ -46,7 +45,7 @@ module.exports = {
           res.status(403).json({ message: "Invalid token" });
         } else {
           email = decoded.email;
-          verificationCodes.set("ahmed_semlali@hotmail.fr", 1);
+
           const code = req.body.code;
 
           if (!verificationCodes.has(email)) {
@@ -58,6 +57,10 @@ module.exports = {
               message: "Email Verification complete",
             });
             verificationCodes.delete(email);
+            getModels().client.update(
+              { valide: true },
+              { where: { Email: email } }
+            );
           } else {
             res.json({
               message: "Invalid Verification Code",

@@ -52,7 +52,7 @@ module.exports = {
 
   LoginClient: async (req, res) => {
     let k = Date.now();
-    console.log(k.getMinutes());
+
     const { email, password } = req.body;
     const user = await getModels().client.findOne({ where: { Email: email } });
     if (user === null) {
