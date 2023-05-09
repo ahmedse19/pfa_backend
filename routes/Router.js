@@ -11,7 +11,10 @@ const {
   getClientDetails,
   getMaps,
 } = require("../controllers/DetailsController.js");
-const { ResendEmail } = require("../controllers/EmailController.js");
+const {
+  ResendEmail,
+  verifyEmail,
+} = require("../controllers/EmailController.js");
 const { forwardRequest } = require("../controllers/MainController.js");
 const { upload } = require("../middleware/middleware.js");
 
@@ -26,5 +29,6 @@ router.route("/map").get(getMaps);
 router.post("/image", upload.single("image"), forwardRequest);
 router.route("/logoutClient").post(LogoutClient);
 router.route("/resendEmail").post(ResendEmail);
+router.route("/verifycode").post(verifyEmail);
 
 module.exports = router;

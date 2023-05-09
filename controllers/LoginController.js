@@ -4,6 +4,9 @@ const jwt = require("jsonwebtoken");
 const { getModels } = require("../routes/databaseCon.js");
 const { sendEmail } = require("../Services/EmailService.js");
 
+const jwtTokensClients = new Map();
+const jwtTokensAdmins = new Map();
+
 module.exports = {
   LoginAdmin: async (req, res) => {
     const { email, password } = req.body;
@@ -23,6 +26,7 @@ module.exports = {
             process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: "30m" }
           );
+
           res.json({
             message: "logged in successfully",
             data: {
@@ -30,6 +34,8 @@ module.exports = {
               accessToken: accessToken,
             },
           });
+
+          jwtTokensAdmins.set(email, accessToken);
         } else {
           res.status(401).json({
             message: "password is incorrect",
@@ -45,6 +51,8 @@ module.exports = {
   },
 
   LoginClient: async (req, res) => {
+    let k = Date.now();
+    console.log(k.getMinutes());
     const { email, password } = req.body;
     const user = await getModels().client.findOne({ where: { Email: email } });
     if (user === null) {
@@ -55,8 +63,9 @@ module.exports = {
           const accessToken = jwt.sign(
             { email: email },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: "5m" }
+            { expiresIn: "50m" }
           );
+
           res.json({
             message: "logged in successfully",
             data: {
@@ -64,6 +73,7 @@ module.exports = {
               accessToken: accessToken,
             },
           });
+          jwtTokensClients.set(email, accessToken); //tokens persist in the map
         } else {
           res.status(401).json({
             message: "password is incorrect",
