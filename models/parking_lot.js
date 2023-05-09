@@ -42,6 +42,10 @@ module.exports = function(sequelize, DataTypes) {
     latitude: {
       type: DataTypes.DOUBLE,
       allowNull: false
+    },
+    Prix_spot: {
+      type: DataTypes.FLOAT,
+      allowNull: true
     }
   }, {
     sequelize,

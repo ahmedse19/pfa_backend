@@ -11,14 +11,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    Max_Size: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    Montant_spot: {
-      type: DataTypes.FLOAT,
-      allowNull: false
-    },
     Availabilty: {
       type: DataTypes.BOOLEAN,
       allowNull: false
