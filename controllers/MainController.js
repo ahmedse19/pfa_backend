@@ -1,6 +1,10 @@
 const axios = require("axios");
 const fs = require("fs");
 const FormData = require("form-data");
+const bcrypt = require("bcrypt");
+require("dotenv").config();
+const jwt = require("jsonwebtoken");
+const { getModels } = require("../routes/databaseCon.js");
 
 module.exports = {
   forwardRequest: async (req, res) => {
@@ -39,5 +43,67 @@ module.exports = {
           res.send("error");
         });
     }
+  },
+  getParkings: async (req, res) => {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    let email;
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+      if (err) {
+        res.status(403).json({ message: "Invalid token" });
+      } else {
+        email = decoded.email;
+      }
+    });
+
+    const user = await getModels().administrateur.findOne({
+      where: { Email: email },
+    });
+    if (user === null) {
+      return res.status(400).json({
+        message: "user not found",
+      });
+    }
+
+    const reservations = await getModels().parking_lot.findAll({
+      where: {
+        Id_Admin: user.Id_Admin,
+      },
+    });
+    res.status(200).json({
+      message: "user found",
+      data: reservations,
+    });
+  },
+  getReservations: async (req, res) => {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    let email;
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+      if (err) {
+        res.status(403).json({ message: "Invalid token" });
+      } else {
+        email = decoded.email;
+      }
+    });
+
+    const user = await getModels().client.findOne({
+      where: { Email: email },
+    });
+    if (user === null) {
+      return res.status(400).json({
+        message: "user not found",
+      });
+    }
+
+    const reservations = await getModels().reservation.findAll({
+      where: {
+        Id_client: user.Id_client,
+      },
+    });
+    res.status(200).json({
+      message: "user found",
+      data: reservations,
+    });
   },
 };

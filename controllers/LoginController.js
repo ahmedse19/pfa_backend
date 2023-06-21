@@ -138,7 +138,7 @@ module.exports = {
     }
   },
   createAdmin: async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, numero_Tel } = req.body;
 
     try {
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -146,6 +146,7 @@ module.exports = {
         Name: name,
         Email: email,
         Password: hashedPassword,
+        numero_Tel: numero_Tel,
       });
       res.status(201).json({
         message: "admin created successfully",
