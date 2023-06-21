@@ -164,7 +164,7 @@ module.exports = {
       if (err) {
         res.status(403).json({ message: "Invalid token" });
       } else {
-        decode.exp = Date.now();
+        decoded.exp = Date.now();
         res.status(200).json({ message: "logged out successfully" });
       }
     });
